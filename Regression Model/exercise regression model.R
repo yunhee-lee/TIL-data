@@ -37,3 +37,7 @@ points(xbar, ybar, pch=17, cex=2.0, col="RED")
 text(xbar, ybar, "(8.85, 19.36)")
 fx <- "Y-hat = 0.328+2.14X"
 text(locator(1), fx)
+
+# Anova ####
+market.lm = lm(Y ~ X, data=market)
+anova(market.lm)
