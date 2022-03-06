@@ -1,4 +1,4 @@
-market = read.table("~/Work/TIL-data/R/Sample Data/reg2020/market-1.txt", header=TRUE)
+market = read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/market-1.txt", header=TRUE)
 head(market)
 
 # Scatter Plot ####
