@@ -48,7 +48,7 @@ rm(list=ls())
 
 
 
-# Data Structure ####
+# Data Structure - vector, matrix ####
 # Creating vectors
 # seq() 함수를 이용한 벡터 생성
 # from, to, by 매개 변수가 지정되면 작성 순서 관계 없음
@@ -72,22 +72,48 @@ rep(c(2, 4, 8), length=5) # 2 4 8 2 4
 # Editing vectors
 v1 <- c(11:20)
 v1[c(3, 5)] # 13 15
-v1[v1>18] # 19 20ß
+v1[v1>18] # 19 20
 v1[c(-2, -4)] # 11 13 15 16 17 18 19 20
 # replace() 일부 자료 대체
 v2 <- c(3:7)
-replace(v2, 2, 10) # 3 10  5  6  7
+replace(v2, 2, 10) # 3 10 5 6 7
 # append() 조건에 따른 위치에 자료 삽입
 # v2의 다섯 번재 값 다음에 10을 추가
-append(v2, 10, after=5) # 3  4  5  6  7 10
+append(v2, 10, after=5) # 3 4 5 6 7 10
 # sort() 자료 정렬
 x <- c(rep(3, 3), seq(3, 7, 2), rev(seq(3, 7, length=3)), rep(4, 3)) # 3 3 3 3 5 7 7 5 3 4 4 4
 sort(x) # 3 3 3 3 3 4 4 4 5 5 7 7
 # rank() 자료의 순위 출력
 # 별도 조건을 지정하지 않을 경우, 순위값의 평균값을 부여
-rank(x) # 3.0  3.0  3.0  3.0  9.5 11.5 11.5  9.5  3.0  7.0  7.0  7.0
+rank(x) # 3.0 3.0 3.0 3.0 9.5 11.5 11.5 9.5 3.0 7.0 7.0 7.0
 # order() 오름차순에 의한 자료의 위치값 출력
-order(x) # 1  2  3  4  9 10 11 12  5  8  6  7
+order(x) # 1  2 3 4 9 10 11 12 5 8 6 7
 
-
-
+# Handling Matrix
+# Creating a matrix
+matr <- matrix(1:9, nrow=3)
+matr
+length(matr) # 9
+mode(matr) # "numeric"
+dim(matr) # 3 3
+r1 <- c(1, 2, 3); r2 <- c(4, 5, 6); r3 <- c(7, 8, 9)
+rbind(r1, r2, r3)
+m1 <- 1:9 # ':' 만으로도 c(1:9)와 동일한 기능을 수행
+dim(m1) <- c(3, 3)
+m1
+matr2 <- matrix(c(1:9), ncol=3, byrow=T) # byrow=T Option을 통해 행 기준 3열의 행렬 생성
+matr2[1,] # 1 4 7
+matr2[,3] # 3 6 9
+matr2[2, 3] # 6
+matr2[matr2[,3]>4, 2] # 3열에서 4보다 큰 행의 값 중 2열의 모든 값
+# Operating a matrix - apply(), sweep()
+# apply() 함수를 활용한 연산
+Height <- c(140, 155, 142, 175)
+size.1 <- matrix(c(130, 26, 110, 24, 118, 25, 112, 25), ncol=2, byrow=T,
+                 dimnames=list(c("Lee", "Kim", "Park", "Choi"), c("Weight", "Waist")))
+size <- cbind(size.1, Height)
+colmean <- apply(size, 2, mean) # 2 : 열 평균 값을 계산, 1 : 행 평균 값을 계산
+colmean # Weight 117.5 Waist 25.0 Height 153.0
+# sweep() 함수를 활용한 연산 - 기본 연산은 minus로 지정되어 있음
+sweep(size, 2, colmean)
+sweep(size, 1, c(1, 2, 3, 4), "+") # size 각 행의 값에 c(1, 2, 3, 4) 값을 더해 줌
