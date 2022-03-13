@@ -41,3 +41,47 @@ text(locator(1), fx)
 # Anova ####
 market.lm = lm(Y ~ X, data=market)
 anova(market.lm)
+
+# Estimation and Test ####
+# Confidence interval of coefficient
+market.lm = lm(Y ~ X, data=market)
+summary(market.lm)
+q.val = qt(0.975, 8)
+# +/- t-value times standard error
+ci_from <- 2.6087-q.val*0.3874
+ci_to <- 2.6087+q.val*0.3874
+# Confidence interval of Y
+pred.frame = data.frame(X=seq(3.5, 14.5, 0.2))
+pc = predict(market.lm, int="c", newdata=pred.frame) # 기대값 신뢰구간
+pp = predict(market.lm, int="p", newdata=pred.frame) # 새로운 값 신뢰구간
+head(pc, 3)
+head(pp, 3)
+# 신뢰대 그리기
+pred.X = pred.frame$X
+plot(market$X, market$Y, ylim=range(market$Y, pp))
+matlines(pred.X, pc, lty=c(1, 2, 2), col="BLUE") # lty 1 : 점선, 2 : 실선
+matlines(pred.X, pp, lty=c(1, 3, 3), col="RED")
+# pp의 신뢰대가 pc의 신뢰대보다 더 넓은 영역을 차지
+
+# Weighted Regression ####
+x = c(1, 2, 3, 4, 5)
+y = c(2, 3, 5, 8, 7)
+w = 1/x
+w.lm = lm(y ~ x, weights=w)
+summary(w.lm)
+anova(w.lm)
+
+# Practice - Simple Linear Regression ####
+super = read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/market-1.txt", header=TRUE, row.names="NUMBER")
+head(super)
+attach(super) # Dataset의 변수명을 직접 사용
+plot(X, Y, pch=19)
+super.lm = lm(X ~ Y, data=super)
+summary(super.lm)
+anova(super.lm)
+names(super.lm)
+cbind(super, super.lm$resid, super.lm$fitted)
+# 잔차 그림 그리기
+plot(super$X, super.lm$resid, pch=19)
+abline(h=0, lty=2)
+# 결과를 보면 잔차가 0을 중심으로 일정한 범위 내에 존재

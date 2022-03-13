@@ -44,3 +44,7 @@
 ### Standard Error of Estimate
 * MSE의 제곱근
 * 회귀분석 결과에서 Residual standard error로 표시
+
+## Estimation and Test
+## Weighted Regression
+* 오차항마다 분산이 다른 경우, 가중최소제곱법(method of weighted least squares)을 사용
