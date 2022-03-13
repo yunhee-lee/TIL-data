@@ -3,6 +3,17 @@ https://www.google.com/
 https://stackoverflow.com/
 
 ## R
+### How to learn R functions effectively
+```
+help(function_name)
+?function_name
+
+??search_keyword
+
+example(function_name)
+
+help(package="package_name")
+```
 ### Websites
 [RStudio Education](https://education.rstudio.com/learn/)
 R Studio에서 제공하는 수준(beginners, intermediates, experts) 별 학습 Guide, Resources
