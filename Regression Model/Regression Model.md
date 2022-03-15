@@ -1,6 +1,5 @@
 # Regression Model
 ## Regression Analysis
-- - - -
 * Variables
 	* Independent variable (= explanatory variable)
 	* Dependent variable (= response variable)
@@ -8,7 +7,6 @@
 	* 이 때, ‘회귀’는 종속변수는 평균으로 회귀하려는 경향이 있기 때문에 붙여진 이름
 
 ## Simple Regression Model
-- - - -
 * Simple regression model
 	* Linear in the regression coefficients
 	* Linear in the independent variable
@@ -21,7 +19,6 @@
 *  [The method of least squares](https://en.wikipedia.org/wiki/Least_squares)  is a standard approach in regression analysis to approximate the solution of overdetermined systems (sets of equations in which there are more equations than unknowns) by minimizing the sum of the squares of the residuals (a residual being: the difference between an observed value, and the fitted value provided by a model) made in the results of each individual equation.
 
 ## Residual
-- - - -
 * The  [residual](https://en.wikipedia.org/wiki/Errors_and_residuals)  is the difference between the observed value and the estimated value of the quantity of interest (for example, a sample mean).
 	* (Ref.) The  [error](https://en.wikipedia.org/wiki/Errors_and_residuals)  (or disturbance) of an observation is the deviation of the observed value from the true value of a quantity of interest (for example, a population mean).
 * Traits of residual
@@ -31,3 +28,23 @@
 	* 잔차들의 X에 의한 가중합은 0
 	* 잔차들의 Y-hat에 의한 가중합은 0
 	* X의 평균과 Y의 평균은 적합된 회귀선상에 위치
+
+## Precision
+### F-value
+* Analysis of variance table
+	* SST = SSE + SSR
+		* Total sum of squares (SST)
+		* Sum of squares due to residual error (SSE)
+		* Sum of squares due to regression (SSR)
+	* F-value = MSR / MSE
+### Coefficient of Determination
+* R-squared = SSR / SST
+	* R-squared values range from 0 to 1
+	* R-squared of 100% means that all movements of dependent variable are completely explained by movements in the independent variables
+### Standard Error of Estimate
+* MSE의 제곱근
+* 회귀분석 결과에서 Residual standard error로 표시
+
+## Estimation and Test
+## Weighted Regression
+* 오차항마다 분산이 다른 경우, 가중최소제곱법(method of weighted least squares)을 사용
