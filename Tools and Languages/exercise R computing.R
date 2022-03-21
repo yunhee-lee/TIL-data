@@ -117,3 +117,75 @@ colmean # Weight 117.5 Waist 25.0 Height 153.0
 # sweep() 함수를 활용한 연산 - 기본 연산은 minus로 지정되어 있음
 sweep(size, 2, colmean)
 sweep(size, 1, c(1, 2, 3, 4), "+") # size 각 행의 값에 c(1, 2, 3, 4) 값을 더해 줌
+
+
+
+# Data Structure - array, list, data frame ####
+# Array : 행렬을 2차원 이상으로 확장시킨 객체
+# 일반적으로는 3차원 이상의 데이터 객체를 배열이라고 함
+# mode() - 자료의 형태
+# dim() - 각 차원 벡터의 크기
+# 배열의 경우, 행/열 그리고 행렬번호 포함
+# dimnames() - 각 차원 리스트의 이름
+# array(data, dim=c(행의 개수, 열의 개수, 행렬의 개수, ...), dim.names=NULL)
+arr <- array(1:24, c(3, 3, 2)) # 1-18까지의 자료 생성
+# 아래 함수를 통해 각 차원의 이름을 지정
+dimnames(arr) <- list(paste("row", c(1:3)),
+                      paste("col", c(1:3)),
+                      paste("ar", c(1:2)))
+# length() - 자료의 개수
+length(arr)
+dt <- 1:40
+dim(dt) <- c(5, 4, 2)
+dt
+# 1-6의 자료로 1차원 배열 생성 (not a vector)
+array(1:6)
+array(1:6, c(2:3))
+# 배열의 연산은 각 원소의 위치 단위로 시행
+ary1 <- array(1:8, c(2, 2, 2))
+ary2 <- array(16:24, c(2, 2, 2))
+ary1 + ary2
+ary1 * ary2
+# %*% matrix와 array의 경우가 다름
+# 두 배열 원소들의 곱의 합
+ary1 %*% ary2
+# 배열 원소의 추출 및 삭제
+ary1[,,1]
+ary1[1,1,] # 1 5
+ary1[1,,-2] # 1 3
+ary1[1,,1] # 위 결과와 동일
+
+# List : 서로 다른 형태(mode)의 데이터로 구성된 객체
+# 형태뿐 아니라, 길이도 다를 수 있음
+a <- 1:10
+b <- 11:15
+klist <- list(vec1=a, vec2=b, descrip="example")
+length(klist) # 원소가 아닌! 자료의 개수! 
+vlist <- list(a, b, "example")
+klist[[1]]; klist$vec1;
+vlist[[1]];
+klist[[1]][3]; klist$vec1[3];
+list1 <- list("A", 1:8)
+list1[[3]] <- list(c(T, F)) # 세 번째 성분을 추가
+list1[[2]][9] <- 9 # 두 번째 성분에 원소 추가
+list1
+
+# Data Frame : 각 열들이 서로 다른 형태의 객체를 가질 수 있음
+# 형태(mode)가 일반화된 행렬(matrix)
+# Data Frame이라는 하나의 객체에 여러 종류의 자료가 들어갈 수 있음
+# Data Frame의 각 열은 각각 변수와 대응
+# 분석이나 모형 설정에 적합한 자료 객체
+# read.table() 함수를 이용하여 외부 텍스트 파일을 불러들일 수 있음
+# data.frame() 함수를 이용하여 여러 종류의 자료 객체들을 서로 결합
+# as.data.frame() 함수를 사용하여 다른 형태의 자료객체를 데이터 프레임의 형태로 변환
+d2 <- read.table("~/Work/TIL-data/Tools and Languages/Sample Data/dat_exam2.txt", header=T)
+char1 <- rep(LETTERS[1:3], c(2, 2, 1))
+num1 <- rep(1:3, c(2, 2, 1))
+test1 <- data.frame(char1, num1)
+a1 <- c("a", "b", "c", "d", "e", "f", "g", "h")
+dim(a1) <- c(2, 4)
+test2 <- as.data.frame(a1)
+# Data Frame의 결합 : cbind(), rbind(), merge()
+# rbind() 결합 시, 변수 명이 동일해야 함
+# cbind() 열의 개수가 일치해야 함
+# merge() : 왼쪽의 변수 값을 기준으로 Matching, 교집합을 남기는 구조
