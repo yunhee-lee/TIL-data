@@ -51,7 +51,7 @@
 * **표본분포 (smpling distribution) : 표본 통계량의 분포**
 	* 표본분포는 표본으로부터 계산되는 통계량과 모수 사이의 관계를 규명해 주기 때문에, 모수의 추정과 검정을 가능하게 함
 ## 표본평균의 분포
-* 모집단의 분포가 정규분포가 $N(\mu, s^2)$ 일 때, 표본 크기 n인 랜덤표본의 표본평균 $\bar{X}$는 정규분포 $N(\mu, \frac{s^2}{n})$를 따름
+* 모집단의 분포가 정규분포가 <img src=“https://render.githubusercontent.com/render/math?math=N(\mu, s^2)”>일 때, 표본 크기 n인 랜덤표본의 표본평균 <img src=“https://render.githubusercontent.com/render/math?math=\bar{X}”>는 정규분포 <img src=“https://render.githubusercontent.com/render/math?math=N(\mu, \frac{s^2}{n})”>를 따름
 ### 중심극한정리 (central limit theorem)
-* 평균이 $\mu$이고, 분산이 $\sigma^2$인 임의의 모집단에서 표본의 크기 n이 충분히 크면 (모집단의 분포가 정규분포가 아니더라도) 표본평균 $\bar{X}$의 분포는 정규분포를 따름
-$$ \bar{X} \sim N(\mu, \frac{s^2}{n}) $$
+* 평균이 <img src=“https://render.githubusercontent.com/render/math?math=\mu”>이고, 분산이 <img src=“https://render.githubusercontent.com/render/math?math=\sigma^2”>인 임의의 모집단에서 표본의 크기 n이 충분히 크면 (모집단의 분포가 정규분포가 아니더라도) 표본평균 <img src=“https://render.githubusercontent.com/render/math?math=\bar{X}”>의 분포는 정규분포를 따름
+<img src=“https://render.githubusercontent.com/render/math?math=\bar{X} \sim N(\mu, \frac{s^2}{n})”>
