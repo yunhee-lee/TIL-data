@@ -79,4 +79,3 @@
 ## F분포
 * 정규분포를 따르는 두 모집단에서 독립적으로 추출한 표본들의 표본분산비의 확률분포
 *  [F 분포 - 위키백과, 우리 모두의 백과사전](https://ko.wikipedia.org/wiki/F_%EB%B6%84%ED%8F%AC)
-*  [F 분포 - 위키백과, 우리 모두의 백과사전](https://ko.wikipedia.org/wiki/F_%EB%B6%84%ED%8F%AC)
