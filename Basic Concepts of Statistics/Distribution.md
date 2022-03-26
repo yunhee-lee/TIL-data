@@ -54,4 +54,4 @@
 * 모집단의 분포가 정규분포가 ![equation](https://latex.codecogs.com/gif.latex?N%28%5Cmu%2C%20s%5E2%29)일 때, 표본 크기 n인 랜덤표본의 표본평균 ![equation](https://latex.codecogs.com/gif.latex?%5Cbar%7BX%7D)는 정규분포 ![equation](https://latex.codecogs.com/gif.latex?N%28%5Cmu%2C%20%5Cfrac%7Bs%5E2%7D%7Bn%7D%29)를 따름
 ### 중심극한정리 (central limit theorem)
 * 평균이 ![equation](https://latex.codecogs.com/gif.latex?%5Cmu)이고, 분산이 ![equation](https://latex.codecogs.com/gif.latex?%5Csigma%5E2)인 임의의 모집단에서 표본의 크기 n이 충분히 크면 (모집단의 분포가 정규분포가 아니더라도) 표본평균 ![equation](https://latex.codecogs.com/gif.latex?%5Cbar%7BX%7D)의 분포는 정규분포를 따름 :
-![equation](https://latex.codecogs.com/gif.latex?%5Cbar%7BX%7D%20%5Csim%20N%28%5Cmu%2C%20%5Cfrac%7Bs%5E2%7D%7Bn%7D%29)
+* ![equation](https://latex.codecogs.com/gif.latex?%5Cbar%7BX%7D%20%5Csim%20N%28%5Cmu%2C%20%5Cfrac%7Bs%5E2%7D%7Bn%7D%29)
