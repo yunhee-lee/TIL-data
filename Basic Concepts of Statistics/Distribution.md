@@ -26,7 +26,7 @@
 	* 비례성 - 단위시간이나 공간에서 성공의 평균 출현 횟수는 일정
 * 단위당 평균 발생률이 m인 어떤 현상에 대해서..
 	* X = 단위당 발생 횟수
-	*` X ~ Poisson(m)`
+	* ` X ~ Poisson(m)`
 		* P[X = x] = {e^(-m)  m^x} / x!
 		* e = 2.718281…
 	* E(X) = m
@@ -34,7 +34,7 @@
 
 ## 연속형 확률분포
 ### 정규분포 (normal distribution)
-*` X ~ N(m, s^2)` → 확률변수 X는 평균 m, 표준편차 s인 정규분포를 따른다
+* ` X ~ N(m, s^2)` → 확률변수 X는 평균 m, 표준편차 s인 정규분포를 따른다
 * 분포의 모양은 m와 s의 값에 의해 결정됨
 	* m 값을 중심으로 좌우 대칭
 	* s 값에 따라 평균 주위에 얼마나 집중적으로 분포하는지 (종 모양) 달라짐
@@ -51,7 +51,7 @@
 * **표본분포 (sampling distribution) : 표본 통계량의 분포**
 	* 표본분포는 표본으로부터 계산되는 통계량과 모수 사이의 관계를 규명해 주기 때문에, 모수의 추정과 검정을 가능하게 함
 ## 표본평균의 분포
-* 모집단의 분포가 정규분포가 $N(\mu, s^2)$ 일 때, 표본 크기 n인 랜덤표본의 표본평균 $\bar{X}$는 정규분포 $N(\mu, \frac{s^2}{n})$를 따름
+* 모집단의 분포가 정규분포가 ![equation](https://latex.codecogs.com/gif.latex?N%28%5Cmu%2C%20s%5E2%29)일 때, 표본 크기 n인 랜덤표본의 표본평균 ![equation](https://latex.codecogs.com/gif.latex?%5Cbar%7BX%7D)는 정규분포 ![equation](https://latex.codecogs.com/gif.latex?N%28%5Cmu%2C%20%5Cfrac%7Bs%5E2%7D%7Bn%7D%29)를 따름
 ### 중심극한정리 (central limit theorem)
-* 평균이 $\mu$이고, 분산이 $\sigma^2$인 임의의 모집단에서 표본의 크기 n이 충분히 크면 (모집단의 분포가 정규분포가 아니더라도) 표본평균 $\bar{X}$의 분포는 정규분포를 따름
-$$ \bar{X} \sim N(\mu, \frac{s^2}{n}) $$
+* 평균이 ![equation](https://latex.codecogs.com/gif.latex?%5Cmu)이고, 분산이 ![equation](https://latex.codecogs.com/gif.latex?%5Csigma%5E2)인 임의의 모집단에서 표본의 크기 n이 충분히 크면 (모집단의 분포가 정규분포가 아니더라도) 표본평균 ![equation](https://latex.codecogs.com/gif.latex?%5Cbar%7BX%7D)의 분포는 정규분포를 따름 :
+![equation](https://latex.codecogs.com/gif.latex?%5Cbar%7BX%7D%20%5Csim%20N%28%5Cmu%2C%20%5Cfrac%7Bs%5E2%7D%7Bn%7D%29)
