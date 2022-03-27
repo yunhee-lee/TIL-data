@@ -233,3 +233,120 @@ setequal(x, y) # FALSE
 # choose(n, k)는 n개의 원소로 이루어진 집합에서 추출 가능한 k개의 원소로 이루어진 부분집합의 수를 계산 = 조합의 수
 5 %in% x # TRUE
 choose(5, 2) # 10
+
+
+
+# R Programming Language - functions ####
+# Numerical Functions ##
+pi
+sin(10)
+cos(10)
+tan(10)
+# arc sin/cos/tan 함수 - 역함수
+asin(1)
+acos(0)
+atan(0.6)
+log(2)
+log10(10)
+exp(10)
+# Root
+sqrt(8)
+
+x <- c(1, 2, -3, 4)
+min(x) # -3
+x1 <- c(1, 2, -3, 4)
+x2 <- c(2, 4, -6, 7)
+min(x1, x2) #-6
+range(x) # -3 4
+pmin(x1, x2) # 1 2 -6 4 - 두 벡터의 상응하는 원소들 중 작은 값!
+
+# Statistic Function ##
+mean(x1)
+# 표준편차
+sd(x1)
+# 분산
+var(x1)
+# 중앙값
+median(x1)
+x3 <- c(1:294)
+quantile(x3, 0.45)
+# 상관계수
+x <- c(1:10)
+y <- c(10, 9, 8, 7, 6, 5, 4, 3, 2, 5)
+cor(x, y)
+
+
+
+# R Programming Language - conditional statement ####
+x <- c(1, 2, 3, 4)
+y <- c(2, 1, 4, 5)
+# if - x의 합이 y의 합보다 작을 때 x를 출력
+if(sum(x) < sum(y)) print(x)
+
+if(sum(x) < sum(y)) {
+  +print(mean(x))
+  +print(var(x))
+}
+
+# if else
+if(mean(x) > mean(y)) print("A") else
+  print("B")
+if(mean(x) > mean(y)) {
+  print(mean(x))
+  print(var(x))
+} else {
+  print(mean(y))
+  print(var(y))
+}
+if(length(x)==5) {
+  if(sum(x)==10) print("length=5, sum=10")
+} else {
+  print("length=4, sum=10")
+}
+
+# ifelse()
+x <- c(1, 2, 3, 4)
+y <- c(2, 1, 4, 5)
+ifelse(x<y, x, y) # 1 1 3 4
+ifelse(sum(x-y)>0, "positive", ifelse(sum(x-y)<0, "negative", "zero"))
+
+# switch()
+x <- c(1:4)
+type <- "var"
+switch(type, mean=mean(x), median=median(x), sum=sum(x), var=var(x))
+
+# for()
+for(i in 1:5) print(rep(i,i))
+x <- 0
+for(i in 1:10)
+  x <- x+i
+
+# while()
+# while 반복문은 while(조건) {실행문}의 형태로 쓰이며 조건이 참일 때까지 실행문을 수행하는 반복문
+i <- 1
+while(i<=5){
+  print(rep(i,i))
+  i <- i+1
+}
+
+# repeat()
+# repeat {실행문}과 같은 형태로 사용되며,
+# 실행문을 계속 수행하다가 break를 만나면 반복수행을 멈추고 작업을 종료 
+i <- 1
+x <- 0
+repeat {
+if(i>10) break
+x <- x+i
+i <- i+1
+}
+print(x)
+
+# next()
+i <- 1
+x <- 0
+while(i<10){
+  i <- i+1
+  if(i<8) next
+  print(i)
+  x <- x+i
+}
