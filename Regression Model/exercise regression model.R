@@ -71,6 +71,8 @@ w.lm = lm(y ~ x, weights=w)
 summary(w.lm)
 anova(w.lm)
 
+
+
 # Practice - Simple Linear Regression ####
 super = read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/market-1.txt", header=TRUE, row.names="NUMBER")
 head(super)
@@ -85,3 +87,70 @@ cbind(super, super.lm$resid, super.lm$fitted)
 plot(super$X, super.lm$resid, pch=19)
 abline(h=0, lty=2)
 # 결과를 보면 잔차가 0을 중심으로 일정한 범위 내에 존재
+
+
+
+# Practice - Multiple Linear Regression ####
+market2 = read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/market-2.txt", header=TRUE)
+head(market2, 10)
+X = market2[,c(2:3)]
+X = cbind(1, X)
+Y = market2[, 4]
+X = as.matrix(X)
+Y = as.matrix(Y)
+XTX = t(X) %*% X
+XTX
+XTY = t(X) %*% Y
+XTY
+XTXI = solve(XTX)
+beta = XTXI %*% XTY
+beta = round(beta, 3)
+beta
+
+# F-value
+market2.lm = lm(Y ~ X1 + X2, data = market2)
+summary(market2.lm)
+# 결정계수 0.9799이고, F-value = 292.5이며, 이에 대한 유의확률이 매우 작은 값
+# 즉, 적합된 중회귀모형이 이 데이터를 설명하는 데 유의함
+# F-value의 기각치 F(2, 12; 0.05)의 값 구하기
+qf(0.95, 2, 12) # 3.885294
+# 여기서 F0 = 292.5 > F(2, 12 ; 0.05)가 성립되어 가정된 중회귀방정식이 이 데이터를 설명하는 데 유의함
+anova(market2.lm)
+
+
+
+# Practice - Standardized Multiple Linear Regression ####
+# install.packages("lm.beta")
+library(lm.beta)
+market2.lm = lm(Y ~ X1+X2, data=market2)
+market2.beta = lm.beta(market2.lm)
+print(market2.beta)
+# 여기서 X1의 표준화계수가 X2의 표준화계수보다 큼
+# 상대적으로 X1의 영향이 더 큼을 알 수 있음
+summary(market2.beta)
+
+# 신뢰구간
+# x1 = 10, x2 = 10에서 E(y)를 95% 신뢰구간으로 추정
+pred.x = data.frame(X1 = 10, X2 = 10)
+pc = predict(market2.lm, int="c", newdata=pred.x)
+pc
+pc99 = predict(market2.lm, int="c", level=0.99, newdata = pred.x)
+pc99
+
+# 회귀계수 검정
+summary(market2.lm)
+# 1.55811 / 0.14793 = 10.532
+
+# Extra sum of square
+health = read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/health.txt", header=TRUE)
+head(health, 3)
+h1.lm = lm(Y ~ X1, data=health)
+h2.lm = lm(Y ~ X1+X4, data=health)
+anova(h1.lm, h2.lm)
+
+# Added variable plot 
+# install.packages("car")
+library(car)
+h4.lm = lm(Y ~ X1+X2+X3+X4, data=health)
+avPlots(h4.lm)
+
