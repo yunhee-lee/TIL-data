@@ -154,3 +154,49 @@ library(car)
 h4.lm = lm(Y ~ X1+X2+X3+X4, data=health)
 avPlots(h4.lm)
 
+
+# Practice - Validation of Regression Model ####
+# 이분산성 진단 예시
+goose = read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/goose.txt", header=TRUE)
+head(goose, 3)
+goose.lm = lm(photo ~ obsA, data=goose)
+# 잔차 산점도 그리기 x축 Y-hat, y축 잔차
+plot(goose.lm$fitted, goose.lm$resid, pch=19)
+# 결과를 보면 시각적으로도 이분산성이 존재함을 알 수 있음
+# install.packages("car")
+library(car)
+ncvTest(goose.lm) # Chisquare = 81.41318, Df = 1, p = < 2.22e-16
+# p 값이 매우 작으므로, 등분산 가정을 기각
+
+# 비선형성 진단 예시
+tree = read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/tree.txt", header=TRUE)
+head(tree, 3)
+tree.lm = lm(V ~ D+H, data=tree)
+par(mfrow=c(1,2))
+plot(tree$D, tree.lm$resid, pch=19)
+plot(tree$H, tree.lm$resid, pch=19)
+# 변수 D의 잔차산점도의 경우, 2차 함수 형태의 비선형성이 나타남(아래로 볼록한 2차 함수)
+
+# 정규성 진단 예시
+goose.lm = lm(photo ~ obsA, data=goose)
+par(mfrow=c(1,1))
+# Quantile-Comparison Plot : plots studentized resituals from a linear model
+qqPlot(goose.lm)
+# 결과 그래프를 보면, 잔차가 직선의 형태를 벗어나 곡선의 형태로 분포 > 정규성 가정 위배
+# install.packages("mvnormtest")
+library(mvnormtest)
+goose.rstudent = rstudent(goose.lm)
+shapiro.test(goose.rstudent) # W = 0.7192, p-value = 5.971e-08
+# 유의확률 p-value가 매우 작으므로, 정규성 가정을 기각
+
+# 반응변수의 변환
+energy = read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/energy.txt", header=TRUE)
+head(energy, 3)
+energy.lm = lm(Y ~ X, data=energy)
+plot(energy.lm$fitted, energy.lm$resid, pch=19)
+# 시각적으로, 이분산성이 의심
+# 아래 Box-Cox 변환
+# install.packages("MASS")
+library(MASS)
+boxcox(Y ~ X, data=energy, lamda=seq(-2, 2, 1/2), plotit=TRUE)
+# log-likelihood 값이 최대가 되는 Lamda 값을 찾으면되는데, 그림에서 0.5이며, 이는 루트 변환에 해당
