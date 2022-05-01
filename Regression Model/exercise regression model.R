@@ -155,6 +155,54 @@ h4.lm = lm(Y ~ X1+X2+X3+X4, data=health)
 avPlots(h4.lm)
 
 
+# Practice - Variable Selection ####
+hospital <- read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/hospital.txt", header=T)
+head(hospital, 3)
+hospital.lm <- lm(Y ~ ., data=hospital) # .은 모든 변수를 모형에 적합
+summary(hospital.lm)
+# install.packages("fmsb")
+library(fmsb)
+VIF(lm(X1 ~ X2+X3+X4+X5, data=hospital)) # 9597.571
+VIF(lm(X2 ~ X1+X3+X4+X5, data=hospital)) # 7.940593
+VIF(lm(X3 ~ X2+X1+X4+X5, data=hospital)) # 8933.087
+VIF(lm(X4 ~ X2+X3+X1+X5, data=hospital)) # 23.29386
+VIF(lm(X5 ~ X2+X3+X4+X1, data=hospital)) # 4.279835
+cor(hospital[,-6])
+# 설명변수들 사이, 특히 X1, X2, X3, X4 간에 강한 선형종속관계 확인
+summary(lm(Y~X2+X3+X4+X5, data=hospital))
+# R-squared도 거의 변하지 않았으며, 각각의 추정된 회귀계수의 표준오차는모두 줄어듦
+
+# 변수선택 방법 예시 - All Possible Regression
+hald = read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/hald.txt", header=T)
+head(hald, 3)
+# install.packages("leaps")
+library(leaps)
+all.lm = regsubsets(Y ~ ., data=hald)
+(rs=summary(all.lm))
+# 독립변수 개수 별 최적의 모형 표시(*)
+names(rs)
+rs$rsq
+rs$adjr2a
+rs$cp
+# 여러 결과를 종합적으로 비교 해보면, 2개 or 3개 변수 적합한 모형을 선택
+
+# 변수선택 방법 예시 - Forward Selection
+start.lm = lm(Y ~ 1, data=hald)
+full.lm = lm(Y ~ ., data=hald)
+step(start.lm, scope=list(lower=start.lm, upper=full.lm), direction="forward")
+# AIC (작을 수록 좋은) 값을 기준으로 변수 추가
+
+# 변수선택 방법 예시 - Backward Elimination Method
+full.lm = lm(Y ~., data=hald)
+step(full.lm, data=hald, direction="backward")
+
+# 변수선택 방법 예시 - Stepwise Regression
+start.lm = lm(Y ~ 1, data=hald)
+full.lm = lm(Y ~ ., data=hald)
+step(start.lm, scope=list(upper=full.lm), data=hald, direction="both")
+
+
+
 # Practice - Validation of Regression Model ####
 # 이분산성 진단 예시
 goose = read.table("~/Work/TIL-data/Regression Model/Sample Data/reg2020/goose.txt", header=TRUE)
