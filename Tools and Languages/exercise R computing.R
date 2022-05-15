@@ -25,8 +25,9 @@ sink()
 
 # write.csv() / write.table() 함수를 이용한 데이터 저장
 # write.table() 함수는 공백을 구분자로 설정
-write.csv(dat3, '~/Work/TIL-data/Tools and Languages/Sample Data/dat_exam1.csv')
+write.csv(dat3, '~/Workㄴ/TIL-data/Tools and Languages/Sample Data/dat_exam1.csv')
 write.table(dat3, '~/Work/TIL-data/Tools and Languages/Sample Data/dat_exam2.txt')
+# write.table() 함수를 사용할 때, comma가 구분자인 경우 sep=',' 옵션을 필수로 사용 (중요!)
 write.table(dat3, '~/Work/TIL-data/Tools and Languages/Sample Data/dat_exam3.txt', sep=',')
 
 # read.csv() 함수를 이용해서 데이터 불러오기
@@ -37,6 +38,9 @@ head(datr)
 str(datr)
 
 # na.strings option을 이용한 결측치 지정
+# read.table() 함수의 경우, header=F가 기본값으로 지정되어 있으므로, read.csv()와 상이
+# txt 파일에서 column number가 있고, (index 제외한) column name이 표현된 경우,
+# 프로그램에서 자동으로 변수명 인식 (header=T 생략 가능)
 nadat <- read.table('~/Work/TIL-data/Tools and Languages/Sample Data/dat_exam2.txt', na.strings='a', header=T)
 nadat
 
@@ -68,6 +72,9 @@ rep(c(1, 2), times=2) # 1 2 1 2
 rep(c(2, 4), times=c(1, 4)) # 2 4 4 4 4
 rep(c(1, 3), each=2) # 1 1 3 3
 rep(c(2, 4, 8), length=5) # 2 4 8 2 4
+
+# 문자형 vector와 숫자형 vector를 묶을 경우, 모든 element가 문자형으로 변환
+# 변환 순서는 문자 > 숫자 > 논리
 
 # Editing vectors
 v1 <- c(11:20)
