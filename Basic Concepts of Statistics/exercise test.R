@@ -29,3 +29,34 @@ vtest_pv = 1-pchisq(vtest, n-1)
 cat("검정통계량값 : ", vtest, "기각역 : ", vtest_cr, "유의확률 : ", vtest_pv)
 # 검정통계량값 :  26.5625 기각역 :  19.67514 유의확률 :  0.005347859
 # 유의수준 5%에서 귀무가설을 기각
+
+# 독립성 검정 ####
+dept <- c(rep("stat", 50), rep("ds", 25))
+regi <- c(rep("y", 20), rep("n", 30), rep("y", 13), rep("n", 12))
+deptregi <- data.frame(dept, regi)
+# 서로 교차하는 분산표를 만드는 xtabs 함수
+rtable <- xtabs(~dept+regi, data=deptregi)
+rtable
+# 검정
+ctest <- chisq.test(rtable, correct=F)
+ctest
+
+# 적합도 검정 ####
+# 은행 전국 60개 지점의 당일 부도수표를 관측
+catnum <- c(0:3)
+obs <- c(33, 15, 9, 3) # 전체 합 60개
+m <- sum(catnum*obs)/sum(obs) # 분할표를 이용하여 구한 표본 평균
+pprob <- round(dpois(catnum, m), 3)
+pprob # 0.497 0.348 0.122 0.028
+# 분포함수를 이루기 위해 합이 1이 되도록 조정
+pprob[4] <- 1-sum(pprob[1:3])
+pprob # 0.497 0.348 0.122 0.033
+pprob * 60 # 29.82 20.88  7.32  1.98 > 기댓값 계산 결과
+# 기대도수 5미만 범주를 병합하여 재분석
+obs1 <- c(33, 15, 12)
+pprob1 <- pprob[1:3]
+pprob1[3] <- 1-sum(pprob[1:2])
+# 검정
+ctest <- chisq.test(obs1, p=pprob1)
+# 아래 chisq의 자유도는 병합한 범주의 개수(3) - 추정모수의 개수(1) - 1
+ctest$statistic > qchisq(0.95, 1)
