@@ -46,3 +46,43 @@ xyplot(tip ~ total_bill | sex + smoker, data = tips,
          panel.xyplot(x, y, pch = 16)
          panel.lmline(x, y)
        })
+
+# factor 변환하지 않아도, y 값에 해당하는 변수를 범주형으로 인식해서 상자그림 생성
+bwplot(cylinder ~ mpg, data = autompg)
+bwplot(as.factor(cylinder) ~ mpg, data = autompg)
+
+# horizontal option에 따라 범주형 변수 인식이 달라짐
+bwplot(weight ~ cylinder, data = autompg, horizontal = FALSE)
+
+# Dot Plot ####
+dotplot(cylinder ~ mpg, data = autompg)
+
+# Mosaic ####
+# 두 변수 모두 범주형 변수인 경우
+# vcd package 활용 (install 필요)
+library(vcd)
+mosaic(~ sex + size, data = tips)
+
+# 범주형 변수가 세 개인 경우
+cotabplot(~ size + sex | smoker, data = tips)
+
+# 다변량 그래프 ####
+# 산점도 행렬
+splom(~ autompg[, c(1, 3:6)], data = autompg)
+# 시각화 상세 설정 적용 시,
+splom(~ autompg[, c(1, 3:6)], groups = cylinder,
+      data = autompg,
+      col = c("red", "orange", "blue", "green", "grey50"),
+      pch = c(16, 2, 15, 3, 1), cex = 0.7,
+      # 범례 지정을 위한 함수
+      key = 
+        list(title = "Various cylinders in autompg",
+             colums = 5,
+             points = list(pch = c(16, 2, 15, 3, 1),
+                           col = c("red", "orange", "blue", "green", "grey50")),
+             text = list(c("3", "4", "5", "6", "8"))))
+
+# 평행좌표그림
+# 전체적인 경향성을 확인할 수 있음
+parallelplot(~ autompg[, c(1, 3:6)],
+             data = autompg, horizontal = FALSE)
