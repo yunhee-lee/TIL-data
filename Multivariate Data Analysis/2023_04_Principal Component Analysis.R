@@ -1,5 +1,5 @@
 rm(list = ls())
-setwd("~/Work/TIL-data/Multivariage Data Analysis")
+setwd("~/Work/TIL-data/Multivariate Data Analysis")
 
 library(HSAUR2)
 data(heptathlon) # 1988년 서울 올림픽 여성 7종 경기 결과
